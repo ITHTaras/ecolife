@@ -1,0 +1,26 @@
+{
+  "Папір": {
+    "title": "Paper",
+    "text": "This includes books, magazines with newspapers, paper packaging, etc.. In order to save space, cardboard and paper products should be made as flat as possible, and then folded into a paper bag or tied with a string.\n\nThe following are not considered waste paper: receipts, cigarette boxes, tetra pak, products that have already undergone processing before, various contaminated and wet paper raw materials."
+  },
+  "Скло": {
+    "title": "Glass",
+    "text": "This type of garbage includes: bottles of medicines and cosmetics, drinks, etc. Broken glass can also be recycled. \n\t\n\tPorcelain is not recycled, as well as especially strong glass (which can withstand strong impacts and high temperature)."
+  },
+  "Органіка": {
+    "title": "Organic",
+    "text": "This includes trees, plants, and food scraps. If you live in a private house, such waste can be compacted, if in an apartment - thrown into a special or common tank."
+  },
+  "Пластик": {
+    "title": "Plastic",
+    "text": "There are seven types of plastic in total, five of which are recyclable. To understand to which type a plastic item belongs, you should take a closer look at the marking. There you will see a triangle with a number from one to seven, sometimes only letters are found in the marking. \n\t\n\tIf there is no marking, or you saw the numbers 7 or 3 on it, such items cannot be recycled."
+  },
+  "Електроніка": {
+    "title": "E-waste",
+    "text": "Used electrical and electronic equipment, batteries and accumulators should be taken to special collection points, which can be found in many stores."
+  },
+  "Метал": {
+    "title": "Metal",
+    "text": "Cans, lids, other metal objects. They need to be cleaned of dirt and well tamped."
+  }
+}
