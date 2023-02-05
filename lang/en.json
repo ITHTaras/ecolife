@@ -2,10 +2,11 @@
   "wastePoints": "Garbage reception points",
   "wastePoint": "Garbage reception point",
   "clothPoint": "Cloth reception point",
+  "cloth": "Cloth",
   "createdPoints": "Created points:",
 
-  "complain": "Complain",
-  "putComplaint": "Complain",
+  "complain": "Send message",
+  "putComplaint": "Message",
   "badContent": "Unacceptable content",
   "fakeInfo": "Fake information",
   "additionalInfo": "Aditional Information: ",
@@ -23,6 +24,7 @@
   "logout": "Logout",
 
   "dump": "Dump",
+  "landfills": "Landfills",
   "pointCreation": "Create point",
   "chooseWasteType": "Choose waste",
   "add": "Create",

@@ -51,7 +51,6 @@ function User({ navigation, route }) {
     longitudeDelta: 0.0421,
   });
 
-  const [image, setImage] = useState(null);
   const [imageURL, setImageURL] = useState(null);
 
   useEffect(() => {

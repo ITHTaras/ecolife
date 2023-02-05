@@ -13,6 +13,7 @@ import Questions from "./screens/Questions";
 import User from "./screens/User";
 import EditProfile from "./screens/EditProfile";
 import Admin from "./screens/admin/Admin";
+import Landfills from "./screens/Landfills";
 
 const Stack = createNativeStackNavigator();
 
@@ -83,6 +84,15 @@ function App() {
             component={Admin}
             options={() => ({
               title: "Адмінська частина",
+              contentStyle: { backgroundColor: "#fff" },
+              headerShadowVisible: true,
+            })}
+          />
+          <Stack.Screen
+            name="Landfills"
+            component={Landfills}
+            options={() => ({
+              title: "",
               contentStyle: { backgroundColor: "#fff" },
               headerShadowVisible: true,
             })}

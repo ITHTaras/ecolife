@@ -5,10 +5,10 @@ import {
   Roboto_400Regular,
 } from "@expo-google-fonts/roboto";
 import MaterialIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useSelector } from "react-redux";
 import langDB from "../lang/langDB.json";
+import langs from "../lang/langs";
 import objects from "../categoryObjects";
 
 function Categories(props) {
@@ -38,16 +38,22 @@ function Categories(props) {
               <TouchableOpacity
                 key={category.id}
                 style={styles.category}
-                onPress={() => {
-                  navigation.navigate("Category", {
-                    name: category.name,
-                    description: category.description,
-                    categoryPoints: category.points,
-                    color: colors[category.id - 1],
-                    id: category.id - 1,
-                    objects: objects[category.id - 1],
-                  });
-                }}
+                onPress={
+                  category.id == 9
+                    ? () => {
+                        navigation.navigate("Landfills");
+                      }
+                    : () => {
+                        navigation.navigate("Category", {
+                          name: category.name,
+                          description: category.description,
+                          categoryPoints: category.points,
+                          color: colors[category.id - 1],
+                          id: category.id - 1,
+                          objects: objects[category.id - 1],
+                        });
+                      }
+                }
               >
                 <View
                   style={{
@@ -58,7 +64,11 @@ function Categories(props) {
                   {icons[category.id - 1]}
                 </View>
                 <Text style={styles.categoryText}>
-                  {lang == "en" ? langDB[category.name].title : category.name}
+                  {category.id == 9
+                    ? langs[lang].landfills
+                    : lang == "en"
+                    ? langDB[category.name].title
+                    : category.name}
                 </Text>
               </TouchableOpacity>
             );
@@ -74,8 +84,11 @@ const icons = [
   <MaterialIcons name="glass-fragile" color="#fff" size={40} />,
   <MaterialIcons name="food-apple" color="#fff" size={40} />,
   <MaterialIcons name="bottle-soda" color="#fff" size={40} />,
-  <Ionicons name="phone-portrait-outline" color="#fff" size={40} />,
+  null,
   <MaterialIcons name="screw-machine-round-top" color="#fff" size={40} />,
+  null,
+  null,
+  <MaterialIcons name="trash-can" color="#fff" size={40} />,
 ];
 
 const colors = [
@@ -83,8 +96,11 @@ const colors = [
   "#2558be",
   "#38c638",
   "#f89c0c",
-  "#d4401f",
+  null,
   "#b9b5b5",
+  null,
+  null,
+  "#a56e15",
 ];
 
 const styles = StyleSheet.create({
@@ -108,6 +124,7 @@ const styles = StyleSheet.create({
   categoryText: {
     fontFamily: "Roboto_500Medium",
     color: "#8b9098",
+    textAlign: "center",
   },
 });
 

@@ -1,6 +1,6 @@
 import axios from "axios";
-const url = "https://ecolifeserver-production.up.railway.app/categories/";
-const pointUrl = "https://ecolifeserver-production.up.railway.app/points/";
+const url = "https://d6f5-31-128-77-15.eu.ngrok.io/categories/";
+const pointUrl = "https://d6f5-31-128-77-15.eu.ngrok.io/points/";
 
 const getCategories = async () => {
   const response = await axios.get(url);
@@ -23,8 +23,8 @@ const addPoint = async (data, token) => {
     },
   };
   // console.log(config);
-
   const response = await axios.post(pointUrl, data, config);
+  console.log(response.data);
   return response.data;
 };
 

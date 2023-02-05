@@ -95,8 +95,14 @@ const categorySlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getCategories.fulfilled, (state, { payload }) => {
+        let resCategories = payload.categories.slice(0, 4);
+        resCategories.push(payload.categories[7]);
+        resCategories.push(payload.categories[5]);
+
+        state.categories = resCategories;
+
         state.isLoading = false;
-        state.categories = payload.categories;
+
         state.points = payload.points;
       })
       .addCase(getCategories.rejected, (state, { payload }) => {

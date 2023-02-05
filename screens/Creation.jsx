@@ -1,12 +1,28 @@
 import { useEffect, useState } from "react";
-import { View, StyleSheet, Dimensions, Text, FlatList } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 import MapView, { Marker } from "react-native-maps";
-import { ActivityIndicator, Button, Snackbar } from "react-native-paper";
+import {
+  ActivityIndicator,
+  Button,
+  Checkbox,
+  Snackbar,
+} from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { addPoint } from "../features/categories/categorySlice";
 import Select from "../components/Select";
 
 import langs from "../lang/langs";
+import { ref, uploadBytes } from "firebase/storage";
+import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
+import { storage } from "../firebase";
 
 export default function Creation() {
   const dispatch = useDispatch();
@@ -16,13 +32,62 @@ export default function Creation() {
   );
 
   const handleSubmit = () => {
-    const data = {
-      latitude: marker.latitude,
-      longtitude: marker.longitude,
-      categories,
-    };
+    let tempImage;
+    if (checked && image) {
+      uploadImage();
+      tempImage = image.substring(image.lastIndexOf("/") + 1);
+    }
+
+    let data;
+
+    if (checked) {
+      data = {
+        latitude: marker.latitude,
+        longtitude: marker.longitude,
+        categories: [{ categoryId: 9 }],
+        image: tempImage,
+      };
+    } else {
+      data = {
+        latitude: marker.latitude,
+        longtitude: marker.longitude,
+        categories,
+        image: null,
+      };
+    }
+
     // console.log(data);
     dispatch(addPoint(data));
+  };
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await launchImageLibraryAsync({
+      mediaTypes: MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.uri);
+    }
+  };
+
+  const uploadImage = async () => {
+    const imageRef = ref(
+      storage,
+      `points/${image.substring(image.lastIndexOf("/") + 1) + user.email}`
+    );
+
+    const response = await fetch(image);
+    const blobImage = await response.blob();
+
+    try {
+      await uploadBytes(imageRef, blobImage);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -41,6 +106,9 @@ export default function Creation() {
 
   const [marker, setMarker] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [image, setImage] = useState(null);
+
+  const [checked, setChecked] = useState(false);
 
   if (isLoading) {
     return (
@@ -67,12 +135,37 @@ export default function Creation() {
               >
                 {marker ? <Marker coordinate={marker} /> : ""}
               </MapView>
-              <Select setCategories={setCategories} lang={lang} />
+              <View style={styles.check}>
+                <Text style={styles.landfills}>{langs[lang].landfills}</Text>
+                <Checkbox
+                  status={checked ? "checked" : "unchecked"}
+                  onPress={() => {
+                    setChecked(!checked);
+                  }}
+                />
+              </View>
+              {!checked ? (
+                <>
+                  <Select setCategories={setCategories} lang={lang} />
+                </>
+              ) : image ? (
+                <Image source={{ uri: image }} style={styles.image} />
+              ) : (
+                <TouchableOpacity style={styles.editImage} onPress={pickImage}>
+                  <Image
+                    source={require("../assets/noimage.png")}
+                    style={styles.noimage}
+                  />
+                </TouchableOpacity>
+              )}
+
               <Button
                 style={styles.submit}
                 mode="contained"
                 onPress={handleSubmit}
-                disabled={!user || !marker || categories.length == 0}
+                disabled={
+                  !user || !marker || (categories.length == 0 && !checked)
+                }
               >
                 {langs[lang].add}
               </Button>
@@ -107,13 +200,33 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginTop: 70,
   },
+  noimage: {
+    width: 202,
+    height: 142,
+    marginTop: 20,
+  },
   map: {
     width: Dimensions.get("window").width,
-    height: 500,
+    height: 400,
     marginTop: 15,
   },
+  check: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 20,
+  },
+  landfills: {
+    fontSize: 16,
+  },
+  image: {
+    width: 200,
+    height: 200,
+    borderRadius: 5,
+  },
   submit: {
-    marginTop: 60,
+    marginTop: 50,
+    backgroundColor: "#2596be",
     borderRadius: 6,
     width: Dimensions.get("window").width * 0.6,
     padding: 4,

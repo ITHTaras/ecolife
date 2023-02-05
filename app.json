@@ -2,6 +2,8 @@
   "expo": {
     "name": "ecolife",
     "slug": "ecolife",
+    "privacy": "public",
+    "description": "An app to help you sort rubbish.",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,15 +16,22 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ithtaras.ecolife"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.ithtaras.ecolife"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -34,6 +43,11 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "4969d293-34c4-4bdf-bbf7-faa4f080a577"
+      }
+    }
   }
 }

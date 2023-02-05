@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "https://ecolifeserver-production.up.railway.app/users/";
+const url = "https://d6f5-31-128-77-15.eu.ngrok.io/users/";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
