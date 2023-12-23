@@ -9,7 +9,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useSelector } from "react-redux";
 import langDB from "../lang/langDB.json";
 import langs from "../lang/langs";
-import objects from "../categoryObjects";
+import { objectsEN, objectsUA } from "../categoryObjects";
 
 function Categories(props) {
   const { lang } = useSelector((store) => store.user);
@@ -50,7 +50,10 @@ function Categories(props) {
                           categoryPoints: category.points,
                           color: colors[category.id - 1],
                           id: category.id - 1,
-                          objects: objects[category.id - 1],
+                          objects:
+                            lang == "en"
+                              ? objectsEN[category.id - 1]
+                              : objectsUA[category.id - 1],
                         });
                       }
                 }

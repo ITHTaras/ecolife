@@ -58,7 +58,7 @@ function App() {
             name="Questions"
             component={Questions}
             options={{
-              title: "Поширені запитання",
+              title: "Frequently Asked Questions",
               contentStyle: { backgroundColor: "#f2f2f2" },
             }}
           />
@@ -74,7 +74,7 @@ function App() {
             name="EditProfile"
             component={EditProfile}
             options={() => ({
-              title: "Редагування профілю",
+              title: "Edit Profile",
               contentStyle: { backgroundColor: "#fff" },
               headerShadowVisible: true,
             })}
@@ -83,7 +83,7 @@ function App() {
             name="Admin"
             component={Admin}
             options={() => ({
-              title: "Адмінська частина",
+              title: "Admin",
               contentStyle: { backgroundColor: "#fff" },
               headerShadowVisible: true,
             })}

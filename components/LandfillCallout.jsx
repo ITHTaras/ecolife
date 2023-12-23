@@ -12,13 +12,9 @@ const LandfillCallout = (props) => {
 
   useEffect(() => {
     if (point.image) {
+      console.log(point.image + point.user.email);
       getDownloadURL(
-        ref(
-          storage,
-          `points/${
-            point.image.substring(user.image.lastIndexOf("/") + 1) + user.email
-          }`
-        )
+        ref(storage, `points/${point.image + point.user.email}`)
       ).then((url) => {
         setModalImage(url);
       });

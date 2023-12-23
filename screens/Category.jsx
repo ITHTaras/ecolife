@@ -6,6 +6,7 @@ import langDB from "../lang/langDB.json";
 
 import MaterialIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import langs from "../lang/langs";
 
 function Category({ route }) {
   const { lang } = useSelector((store) => store.user);
@@ -28,7 +29,7 @@ function Category({ route }) {
         <Divider style={styles.divider} />
         <List.Section>
           <List.Accordion
-            title="ПРИКЛАДИ:"
+            title={langs[lang].wasteExamples}
             expanded={expanded}
             onPress={handlePress}
             style={{

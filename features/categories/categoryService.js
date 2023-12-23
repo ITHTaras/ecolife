@@ -1,6 +1,6 @@
 import axios from "axios";
-const url = "https://d6f5-31-128-77-15.eu.ngrok.io/categories/";
-const pointUrl = "https://d6f5-31-128-77-15.eu.ngrok.io/points/";
+const url = "https://ecolifeserver-production.up.railway.app/categories";
+const pointUrl = "https://ecolifeserver-production.up.railway.app/points/";
 
 const getCategories = async () => {
   const response = await axios.get(url);
